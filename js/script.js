@@ -3,7 +3,7 @@ const form = document.querySelector('form');
 
 let cars = [];
 
-fetch('/data/cars.json')
+fetch('data/cars.json')
   .then((data) => data.json())
   .then((dataJson) => {
     cars = dataJson;
