@@ -4,7 +4,7 @@
     "persons": 7,
     "bags": 4,
     "price": 2000,
-    "image": "/images/mercedes.png",
+    "image": "images/mercedes.png",
     "type": "Minivan"
   },
   {
@@ -12,7 +12,7 @@
     "persons": 5,
     "bags": 2,
     "price": 1200,
-    "image": "/images/bmw.png",
+    "image": "images/bmw.png",
     "type": "Standard"
   },
   {
@@ -20,7 +20,7 @@
     "persons": 3,
     "bags": 0,
     "price": 1300,
-    "image": "/images/toyota.png",
+    "image": "images/toyota.png",
     "type": "Budget"
   },
   {
@@ -28,7 +28,7 @@
     "persons": 5,
     "bags": 2,
     "price": 1500,
-    "image": "/images/tesla.png",
+    "image": "images/tesla.png",
     "type": "Standard"
   },
   {
@@ -36,7 +36,7 @@
     "persons": 3,
     "bags": 0,
     "price": 2000,
-    "image": "/images/ferarri.png",
+    "image": "images/ferarri.png",
     "type": "Budget"
   }
 ]
