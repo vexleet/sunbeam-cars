@@ -1,16 +1,34 @@
 const main = document.querySelector('main');
 const form = document.querySelector('form');
 
+const insurance = 495;
+const vat = 0.25;
+const carRentalPrice = 100;
+
 let cars = [];
 
 fetch('data/cars.json')
   .then((data) => data.json())
   .then((dataJson) => {
     cars = dataJson;
-    renderCars(cars);
   })
 
-function renderCars(carsArr) {
+function calcRentalDays(pickUpDate, handInDate) {
+  const t2 = new Date(pickUpDate).getTime();
+  const t1 = new Date(handInDate).getTime();
+
+  return Math.floor((t1-t2)/(24*3600*1000)) + 1;
+}
+
+function calcRentalCost(car, days) {
+  return ((insurance + (days * carRentalPrice) + (days * car.supplementPerDay)) * (1 + vat)).toFixed(2)
+}
+
+function validateDates(pickUpDate, handInDate) {
+  return pickUpDate < handInDate;
+}
+
+function renderCars(carsArr, days) {
   for(const car of carsArr) {
     const carBody = `
       <section class="car">
@@ -24,7 +42,7 @@ function renderCars(carsArr) {
           </div>
 
           <div class="price">
-              <p>${car.price} DKK</p>
+              <p>${calcRentalCost(car, days)} DKK</p>
               <button>Book Now</button>
           </div>
       </section>
@@ -39,13 +57,23 @@ function renderCars(carsArr) {
 form.addEventListener('submit', function (e) {
   e.preventDefault();
 
+  const pickUpDate = document.getElementById('pickup-date').value;
+  const handInDate = document.getElementById('handin-date').value;
+
   const persons = document.getElementById('persons').value;
   const bags = document.getElementById('suitcases').value;
+
+  const days = calcRentalDays(pickUpDate, handInDate)
+
+  if(!validateDates(pickUpDate, handInDate)) {
+    alert('Hand in date is before pickup date')
+    return;
+  }
 
   const filteredCars = cars.filter((car) => car.persons >= persons && car.bags >= bags);
 
   main.innerHTML = '';
 
-  renderCars(filteredCars);
+  renderCars(filteredCars, days);
 })
 

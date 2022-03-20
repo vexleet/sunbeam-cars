@@ -3,40 +3,40 @@
     "model": "Mercedes",
     "persons": 7,
     "bags": 4,
-    "price": 2000,
     "image": "images/mercedes.png",
-    "type": "Minivan"
+    "type": "Minivan",
+    "supplementPerDay": 105
   },
   {
     "model": "BMW",
     "persons": 5,
     "bags": 2,
-    "price": 1200,
     "image": "images/bmw.png",
-    "type": "Standard"
+    "type": "Standard",
+    "supplementPerDay": 60
   },
   {
     "model": "Toyota",
     "persons": 3,
     "bags": 0,
-    "price": 1300,
     "image": "images/toyota.png",
-    "type": "Budget"
+    "type": "Budget",
+    "supplementPerDay": 0
   },
   {
     "model": "Tesla",
     "persons": 5,
     "bags": 2,
-    "price": 1500,
     "image": "images/tesla.png",
-    "type": "Standard"
+    "type": "Standard",
+    "supplementPerDay": 60
   },
   {
     "model": "Ferarri",
     "persons": 3,
     "bags": 0,
-    "price": 2000,
     "image": "images/ferarri.png",
-    "type": "Budget"
+    "type": "Budget",
+    "supplementPerDay": 0
   }
 ]
