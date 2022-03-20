@@ -28,10 +28,14 @@ function validateDates(pickUpDate, handInDate) {
   return pickUpDate < handInDate;
 }
 
-function renderCars(carsArr, days) {
+function renderCars(carsArr, pickUpDate, handInDate) {
+  const days = calcRentalDays(pickUpDate, handInDate)
+
   for(const car of carsArr) {
+    const carRentPrice = calcRentalCost(car, days);
+
     const carBody = `
-      <section class="car">
+      <section class="car" id="${car.model}">
           <img src="${car.image}" alt="Car"/>
 
           <div class="about">
@@ -42,17 +46,32 @@ function renderCars(carsArr, days) {
           </div>
 
           <div class="price">
-              <p>${calcRentalCost(car, days)} DKK</p>
-              <button>Book Now</button>
+              <p>${carRentPrice} DKK</p>
+              <a href="accesory.html" class="book-car">Book Now</a>
           </div>
       </section>
-  `
+    `
 
     main.insertAdjacentHTML('beforeend', carBody);
+
+    car.carRentPrice = carRentPrice;
+
+    const dates = {
+      pickUpDate,
+      handInDate,
+      days
+    }
+
+    document.querySelector(`#${car.model} .book-car`).addEventListener('click', bookCarEvent.bind(null, car, dates), false);
   }
 }
 
-
+function bookCarEvent(car, dates , e) {
+  localStorage.setItem('car', JSON.stringify(car));
+  localStorage.setItem('pickUpDate', new Date(dates.pickUpDate).toLocaleDateString())
+  localStorage.setItem('handInDate', new Date(dates.handInDate).toLocaleDateString())
+  localStorage.setItem('days', dates.days)
+}
 
 form.addEventListener('submit', function (e) {
   e.preventDefault();
@@ -63,7 +82,6 @@ form.addEventListener('submit', function (e) {
   const persons = document.getElementById('persons').value;
   const bags = document.getElementById('suitcases').value;
 
-  const days = calcRentalDays(pickUpDate, handInDate)
 
   if(!validateDates(pickUpDate, handInDate)) {
     alert('Hand in date is before pickup date')
@@ -74,6 +92,6 @@ form.addEventListener('submit', function (e) {
 
   main.innerHTML = '';
 
-  renderCars(filteredCars, days);
+  renderCars(filteredCars, pickUpDate, handInDate);
 })
 

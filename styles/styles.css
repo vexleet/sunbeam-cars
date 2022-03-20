@@ -126,11 +126,12 @@ main {
     text-align: center;
 }
 
-.car .price button {
+.car .price a {
     border-radius: 20px;
     border: 0;
     padding: 5px 10px;
     margin-top: 5px;
     background: white;
     cursor: pointer;
+    color: black;
 }
